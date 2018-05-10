@@ -1,4 +1,5 @@
-package br.edu.utfpr.testrest.testrestassured;
+package DanielTests;
+
 
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.*;
@@ -10,47 +11,45 @@ import org.junit.BeforeClass;
 
 /**
  *
- * @author andreendo
+ * @author White
  */
-public class FirstTest {
-
+public class Recipe_PuppyTest {
     @BeforeClass
     public static void beforeClass() {
         //configuracao do proxy
         RestAssured.proxy = ProxySpecification
                 .host("10.20.10.50")
                 .withPort(3128)
-                .withAuth("1749307", "");    
+                .withAuth("usuario", "senha");    
         
         RestAssured.registerParser("text/plain", Parser.JSON);
     }
     
     @Test
-    public void testHealthCheck() {
+    public void testReceitaComBatata() {
         when().
-                get("https://api.publicapis.org/health-check").
+                get("http://www.recipepuppy.com/api/?i=potato").
         then()
                 .statusCode(200).
-                body("alive", equalTo(true));
+                body("$", hasItem("potato"));
     }
     
     @Test
-    public void testCategories() {
+    public void testReceitaComBanana() {
         when().
-                get("https://api.publicapis.org/categories").
+                get("http://www.recipepuppy.com/api/?i=banana").
         then()
                 .statusCode(200).
-                body("$", hasItems("Animals", "Vehicle"));
-    }  
+                body("$", hasItem("banana"));
+    }
     
     @Test
-    public void testSpecificCategory() {
-        given().
-                params("category", "animals").
+    public void testNãoTemReceitasComBacon() {
         when().
-                get("https://api.publicapis.org/entries").
+                get("http://www.recipepuppy.com/api/?i=bacom").
         then()
                 .statusCode(200).
-                body("count", equalTo(11));
-    }      
+                body("result.size()", equalTo(0));
+                //body("result.size()", is(0));
+    }
 }
