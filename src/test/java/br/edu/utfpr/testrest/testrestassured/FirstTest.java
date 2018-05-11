@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
  */
 public class FirstTest {
 
-    @BeforeClass
+ 
     public static void beforeClass() {
         //configuracao do proxy
         RestAssured.proxy = ProxySpecification
