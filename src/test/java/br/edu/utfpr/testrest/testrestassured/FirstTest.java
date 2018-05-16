@@ -10,17 +10,17 @@ import org.junit.BeforeClass;
 
 /**
  *
- * @author andreendo
+ * @author renil
  */
 public class FirstTest {
 
     @BeforeClass
     public static void beforeClass() {
         //configuracao do proxy
-        RestAssured.proxy = ProxySpecification
-                .host("10.20.10.50")
-                .withPort(3128)
-                .withAuth("username", "password");    
+//        RestAssured.proxy = ProxySpecification
+//                .host("10.20.10.50")
+//                .withPort(3128)
+//                .withAuth("a1694103", "");    
         
         RestAssured.registerParser("text/plain", Parser.JSON);
     }
@@ -40,7 +40,7 @@ public class FirstTest {
                 get("https://api.publicapis.org/categories").
         then()
                 .statusCode(200).
-                body("$", hasItems("Animals", "Vehicle"));
+                body("$", hasItems("Animals"));
     }  
     
     @Test
@@ -52,5 +52,5 @@ public class FirstTest {
         then()
                 .statusCode(200).
                 body("count", equalTo(11));
-    }      
+    }
 }
