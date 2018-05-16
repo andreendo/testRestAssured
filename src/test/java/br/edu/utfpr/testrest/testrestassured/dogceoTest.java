@@ -42,4 +42,14 @@ public class dogceoTest {
                 .statusCode(200).
                 body("status", is("success"));
     }
+    
+     @Test
+    public void testDogPost() {
+
+        when().
+                post("https://dog.ceo/api/breeds/image/random").
+        then()
+                .statusCode(200).
+                body("codigo", is(not("")));
+    }     
 }
