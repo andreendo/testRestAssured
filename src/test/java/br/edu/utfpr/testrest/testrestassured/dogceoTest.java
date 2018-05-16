@@ -16,7 +16,7 @@ public class dogceoTest {
     }
 
     @Test
-    public void dogAleatorio() {
+    public void dogAleatorioTest() {
         when().
                 get("https://dog.ceo/api/breeds/image/random").
                 then()
@@ -26,7 +26,7 @@ public class dogceoTest {
     }
 
     @Test
-    public void dogListarRacas() {
+    public void dogListarRacasTest() {
         when().
                 get("https://dog.ceo/api/breed/hound/images").
                 then()
@@ -35,7 +35,7 @@ public class dogceoTest {
     }
 
     @Test
-    public void dodListarSubracas() {
+    public void dogListarSubracasTest() {
         when().
                 get("https://dog.ceo/api/breed/hound/list").
                 then()
@@ -44,7 +44,7 @@ public class dogceoTest {
     }
     
      @Test
-    public void testDogPost() {
+    public void dogPostTest() {
 
         when().
                 post("https://dog.ceo/api/breeds/image/random").
