@@ -2,8 +2,12 @@ package br.edu.utfpr.testrest.testrestassured;
 
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.*;
+import io.restassured.http.ContentType;
+import static io.restassured.http.ContentType.JSON;
 import io.restassured.parsing.Parser;
 import io.restassured.specification.ProxySpecification;
+import java.util.HashMap;
+import java.util.Map;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.Test;
 import org.junit.BeforeClass;
@@ -14,43 +18,74 @@ import org.junit.BeforeClass;
  */
 public class FirstTest {
 
-    @BeforeClass
-    public static void beforeClass() {
-        //configuracao do proxy
-        RestAssured.proxy = ProxySpecification
-                .host("10.20.10.50")
-                .withPort(3128)
-                .withAuth("username", "password");    
-        
-        RestAssured.registerParser("text/plain", Parser.JSON);
+
+    
+    @Test
+    public void testGet1() {
+        when().
+                get("https://viacep.com.br/ws/86300000/json/").
+        then()
+                .statusCode(200).
+                body("uf", is("PR"));
     }
     
     @Test
-    public void testHealthCheck() {
+    public void testGet2() {
         when().
-                get("https://api.publicapis.org/health-check").
+                get("https://viacep.com.br/ws/26530230/json/").
         then()
                 .statusCode(200).
-                body("alive", equalTo(true));
-    }
-    
-    @Test
-    public void testCategories() {
-        when().
-                get("https://api.publicapis.org/categories").
-        then()
-                .statusCode(200).
-                body("$", hasItems("Animals", "Vehicle"));
+                body("localidade", is("Nilópolis"));
     }  
     
     @Test
-    public void testSpecificCategory() {
-        given().
-                params("category", "animals").
+    public void testGet3() {
         when().
-                get("https://api.publicapis.org/entries").
+                get("https://viacep.com.br/ws/26510210/json/").
         then()
                 .statusCode(200).
-                body("count", equalTo(11));
-    }      
+                body("bairro", is("Olinda"));
+    }
+    @Test
+    public void testPost1() {
+        Map<String, Object>  post = new HashMap<>();
+        post.put("title", "Tiago");
+        post.put("body", "teste de soft");
+        post.put("userId", 1);
+        given().
+                contentType(ContentType.JSON).
+                body(post).
+        when().
+                post("https://jsonplaceholder.typicode.com/posts").
+        then().
+                statusCode(200);
+    }
+    @Test
+    public void testPost2() {
+        Map<String, Object>  post = new HashMap<>();
+        post.put("title", "Teste");
+        post.put("body", "testando");
+        post.put("userId", 1);
+        given().
+                contentType(ContentType.JSON).
+                body(post).
+        when().
+                post("https://jsonplaceholder.typicode.com/posts").
+        then().
+                statusCode(200);
+    }
+    @Test
+    public void testPost3() {
+        Map<String, Object>  post = new HashMap<>();
+        post.put("title", "testei");
+        post.put("body", "teste");
+        post.put("userId", 1);
+        given().
+                contentType(ContentType.JSON).
+                body(post).
+        when().
+                post("https://jsonplaceholder.typicode.com/posts").
+        then().
+                statusCode(200);
+    }
 }
