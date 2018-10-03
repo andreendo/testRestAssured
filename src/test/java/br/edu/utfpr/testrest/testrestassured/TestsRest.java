@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 
 /**
  *
- * @author KamillaDallmann
+ * @author KamillaD
  */
 public class TestsRest {
    
