@@ -1,0 +1,30 @@
+Get
+
+{  
+   "itens" : [  
+      {  
+         "itemId" : 50285046 ,
+         "parentItemId" : 50285046 ,
+         "nome" : " Celular Straight Talk iPhone 5S 16GB 4G LTE pré-pago" ,
+         "msrp" : 450 , 
+         "salePrice" : 149 ,
+         "upc" : "190198051875" ,
+         " categoryPath " : " Telemóveis / Telemóveis Straight Talk / Straight Talk "
+         }
+      ]
+}
+
+
+
+Post
+
+{	"itemID":"50285047",
+	"parentItemId":"50285047",
+	"nome":"Celular MotoG5",
+	"msrp":"450",
+	"salePrice":"500",
+	"upc" : "190112345678",
+	"categoryPath" : "Telemóveis / Telemóveis Straight Talk / Straight Talk",
+	"longDescription" : "nda"
+
+}
